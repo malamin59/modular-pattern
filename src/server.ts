@@ -1,22 +1,24 @@
-import express, { Request, Response } from "express"
+import express, { Request, Response } from "express";
 
-const app = express()
-app.use(express.json())
+import { userRoute } from "./modules/users/user.route";
+import { initDB } from "./database/bt";
+
+const app = express();
+app.use(express.json());
+
+initDB(); // must be Call the function
 
 /* CREATE A POST ROUTE */
-app.post('/users' , async(req : Request, res : Response) =>{
-const body   = req.body
-console.log( "Body is here ----->", body)
-})
+app.use("/users",userRoute );
 
 /* CREATE A GET API  */
-app.get('/' ,(req : Request, res : Response) =>{
-res.status(200).json({
-message: "This is the root route",
-path: req.path
-})
-})
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({
+    message: "This is the root route",
+    path: req.path,
+  });
+});
 
-app.listen(5000, () =>{
-    console.log("server running on port on 5000")
-})
+app.listen(5000, () => {
+  console.log("server running on port on 5000");
+});
