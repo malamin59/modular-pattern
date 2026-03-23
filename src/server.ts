@@ -9,7 +9,7 @@ app.use(express.json());
 initDB(); // must be Call the function
 
 /* CREATE A POST ROUTE */
-app.use("/users",userRoute );
+app.use("/api/v1/users",userRoute );
 
 /* CREATE A GET API  */
 app.get("/", (req: Request, res: Response) => {
