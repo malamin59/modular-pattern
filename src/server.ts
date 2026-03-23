@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 
 import { userRoute } from "./modules/users/user.route";
 import { initDB } from "./database/bt";
+import { authRouter } from "./modules/auth/auth.route";
 
 const app = express();
 app.use(express.json());
@@ -9,7 +10,10 @@ app.use(express.json());
 initDB(); // must be Call the function
 
 /* CREATE A POST ROUTE */
-app.use("/api/v1/users",userRoute );
+app.use("/api/v1/users", userRoute);
+
+// AUTH ROUTE
+app.use("/api/v1/auth", authRouter);
 
 /* CREATE A GET API  */
 app.get("/", (req: Request, res: Response) => {

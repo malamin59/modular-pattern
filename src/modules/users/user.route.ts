@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { userController } from "./user.controller";
+// import verify from "../../middleware/verify";
 
+const router = Router();
 
-const router  = Router()
+router.post("/", userController.createUser);
 
-router.post('/' , userController.createUser )
-
-export const userRoute = router
+export const userRoute = router;
