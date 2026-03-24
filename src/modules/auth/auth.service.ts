@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import { pool } from "../../database/bt";
 import jwt from "jsonwebtoken"
 
+export  const secret = "s9K#vT2!pL8@xQ4^mZ7$wR1&bN5*eH3"
+
 const loginUserIntoDB = async (email: string, password: string) => {
   const user = await pool.query(
     `
@@ -20,9 +22,10 @@ const loginUserIntoDB = async (email: string, password: string) => {
  const jwtPayload = {
     id : user.rows[0].id,
     name : user.rows[0].name,
-    email : user.rows[0].email
+    email : user.rows[0].email,
+    role : user.rows[0].role
  }
- const secret = "s9K#vT2!pL8@xQ4^mZ7$wR1&bN5*eH3"
+
  const token = jwt.sign(jwtPayload ,secret ,{expiresIn: "7d"})
  delete user.rows[0].password
 
