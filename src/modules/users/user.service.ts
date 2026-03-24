@@ -10,10 +10,19 @@ const createUserIntoDB = async (payload: Record<string, unknown>) => {
     `,
     [name, email, hasPassword],
   );
-  delete result.rows[0].password
+  delete result.rows[0].password;
+  return result;
+};
+
+const getAllUserIntoDB = async () => {
+  const result = await pool.query(
+   `SELECT  id , name , email , create_at , update_at  FROM users `
+  );
+  
   return result;
 };
 
 export const userServices = {
   createUserIntoDB,
+  getAllUserIntoDB,
 };

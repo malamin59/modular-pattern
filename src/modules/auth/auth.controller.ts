@@ -9,8 +9,8 @@ const loginUser = async (req: Request, res: Response) => {
     );
     return res.status(200).json({
       success: true,
-      message: "user created",
-      data: result.rows[0]
+      message: "user created", 
+      data: result
     });
   } catch (error: any) {
     return res.status(500).json({
